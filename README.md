@@ -1,73 +1,95 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🎓 Développement Web Avancé — UniLaSalle Amiens
 
-Currently, two official plugins are available:
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**A hands-on repository to learn the fundamentals of React, used in the _"Développement Web Avancé"_ course at [UniLaSalle Amiens](https://www.unilasalle.fr/).**
 
-## React Compiler
+</div>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📖 About
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This project serves as the practical companion for the **Développement Web Avancé** course taught at **UniLaSalle Amiens**. It is designed to help students discover and master the core concepts of modern front-end development with **React**, **TypeScript**, and **Vite**.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### What you will learn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- ⚛️ React fundamentals — components, props, state, hooks
+- 🔷 TypeScript basics in a React context
+- ⚡ Modern tooling with Vite (HMR, fast builds)
+- 🎨 Styling with Tailwind CSS
+- 🧹 Code quality with ESLint
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Installation
+
+### Prerequisites
+
+| Tool | Version |
+|------|---------|
+| [Node.js](https://nodejs.org/) | **≥ 18** |
+| [npm](https://www.npmjs.com/) | **≥ 9** |
+| [Git](https://git-scm.com/) | latest |
+
+### Getting started
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/Seraphros/TD_DevWebAvance_2026.git
+cd TD_DevWebAvance_2026
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**2. Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+**3. Start the development server**
+
+```bash
+npm run dev
+```
+
+The app will be available at **http://localhost:5173** with hot-module replacement enabled.
+
+### Available scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the development server |
+| `npm run build` | Type-check & build for production |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint on the codebase |
+
+## 🛠️ Tech Stack
+
+| Technology | Role |
+|------------|------|
+| [React 19](https://react.dev/) | UI library |
+| [TypeScript 5.9](https://www.typescriptlang.org/) | Type safety |
+| [Vite 8](https://vite.dev/) | Build tool & dev server |
+| [Tailwind CSS 4](https://tailwindcss.com/) | Utility-first CSS framework |
+| [ESLint](https://eslint.org/) | Linting & code quality |
+
+## 📁 Project Structure
+
+```
+├── public/             # Static assets
+├── src/                # Application source code
+├── index.html          # Entry HTML file
+├── vite.config.ts      # Vite configuration
+├── tsconfig.json       # TypeScript configuration
+├── eslint.config.js    # ESLint configuration
+└── package.json        # Dependencies & scripts
+```
+
+## 📝 License
+
+This project is provided for educational purposes as part of the UniLaSalle Amiens curriculum.
