@@ -81,14 +81,55 @@ The app will be available at **http://localhost:5173** with hot-module replaceme
 ## 📁 Project Structure
 
 ```
-├── public/             # Static assets
-├── src/                # Application source code
-├── index.html          # Entry HTML file
-├── vite.config.ts      # Vite configuration
-├── tsconfig.json       # TypeScript configuration
-├── eslint.config.js    # ESLint configuration
-└── package.json        # Dependencies & scripts
+├── public/                     # Static assets (favicon, icons)
+├── src/
+│   ├── components/
+│   │   ├── Card.tsx            # Reusable card wrapper (title, description, children)
+│   │   ├── Light.tsx           # Single light bulb toggle button
+│   │   ├── LightHolder.tsx     # Light collection manager (state, add button, counter)
+│   │   └── Navbar.tsx          # Top navigation bar
+│   ├── types/
+│   │   └── LightModel.tsx      # Light data model (id, on)
+│   ├── assets/                 # Images (hero, logos)
+│   ├── App.tsx                 # Root component — assembles Navbar, Card & LightHolder
+│   ├── index.css               # Tailwind import & UniLaSalle theme tokens
+│   └── main.tsx                # React entry point
+├── index.html                  # HTML shell
+├── vite.config.ts              # Vite + Tailwind plugin config
+├── tsconfig.json               # TypeScript configuration
+├── eslint.config.js            # ESLint configuration
+└── package.json                # Dependencies & scripts
 ```
+
+## 🎨 User Interface
+
+The UI follows the **UniLaSalle visual identity** — navy blue (`#00395C`) and green accent (`#84B926`) — on a light grey background.
+
+### Layout
+
+- **Navbar** — navy blue top bar displaying "UniLaSalle Amiens" with the course name on the right
+- **Card** — white rounded card with a header (title + description) and a content area, used to contain each exercise
+- **Footer** — discreet course label at the bottom of the page
+
+### Lights exercise
+
+The main exercise is an interactive light panel inside a Card:
+
+- **Light bulbs** — circular toggle buttons; off state is a white circle with a subtle border, on state fills amber with a warm glow effect
+- **Add button** — green UniLaSalle-accent button to append a new light to the collection
+- **Counter** — small text showing how many lights are currently lit (e.g. "3 / 5 allumées")
+
+### Theme tokens (defined in `index.css`)
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `uni-navy` | `#00395C` | Navbar background |
+| `uni-green` | `#84B926` | Accent buttons, hover highlights |
+| `surface` | `#f4f5f7` | Page background |
+| `surface-card` | `#ffffff` | Card background |
+| `surface-border` | `#c4c8d8` | Borders |
+| `text-primary` | `#000f37` | Headings, body text |
+| `text-secondary` | `#495588` | Descriptions, muted text |
 
 ## 📝 License
 

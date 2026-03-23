@@ -11,21 +11,37 @@ export const LightHolder: React.FC = () => {
         {id: 5, on: false},
     ]);
 
-    return (
-        <div className="flex gap-3 items-center justify-center flex-wrap">
-            {
-                lights.map(light => (
-                        <Light key={light.id} on={light.on} setOn={(state) => setLights(
-                            lights.map(l => l.id === light.id ? {...l, on: state} : l)
-                        )}/>
-                    )
-                )
-            }
+    const litCount = lights.filter(l => l.on).length;
 
-            <button className="cursor-pointer border border-gray-400 rounded p-3"
-                    onClick={() => setLights([...lights, {id: lights.length + 1, on: false}])}>
-                Ajouter une lampe
-            </button>
+    return (
+        <div className="flex flex-col items-center gap-8">
+            <div className="flex gap-4 items-center justify-center flex-wrap">
+                {
+                    lights.map(light => (
+                            <Light key={light.id} on={light.on} setOn={(state) => setLights(
+                                lights.map(l => l.id === light.id ? {...l, on: state} : l)
+                            )}/>
+                        )
+                    )
+                }
+            </div>
+
+            <div className="flex items-center gap-4">
+                <button
+                    className="cursor-pointer text-sm rounded-lg
+                               px-4 py-2 text-white bg-uni-green
+                               hover:bg-uni-green-dark
+                               active:scale-97
+                               transition-all duration-150"
+                    onClick={() => setLights([...lights, {id: lights.length + 1, on: false}])}
+                >
+                    + Ajouter une lampe
+                </button>
+            </div>
+
+            <p className="text-xs text-text-secondary tabular-nums">
+                {litCount} / {lights.length} allumée{litCount !== 1 && "s"}
+            </p>
         </div>
     )
 }

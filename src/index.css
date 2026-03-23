@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+    --color-uni-navy: #00395C;
+    --color-uni-navy-dark: #000f37;
+    --color-uni-green: #84B926;
+    --color-uni-green-dark: #6a9a1e;
+    --color-surface: #f4f5f7;
+    --color-surface-card: #ffffff;
+    --color-surface-border: #c4c8d8;
+    --color-text-primary: #000f37;
+    --color-text-secondary: #495588;
+    --color-amber-glow: #f59e0b;
+    --shadow-glow: 0 0 12px 2px oklch(0.8 0.16 75 / 0.5), 0 0 32px 8px oklch(0.75 0.14 75 / 0.2);
+}
