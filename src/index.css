@@ -13,3 +13,12 @@
     --color-amber-glow: #f59e0b;
     --shadow-glow: 0 0 12px 2px oklch(0.8 0.16 75 / 0.5), 0 0 32px 8px oklch(0.75 0.14 75 / 0.2);
 }
+
+/* Dark overrides */
+.dark {
+    --color-surface: #0f1219;
+    --color-surface-card: #1a1f2b;
+    --color-surface-border: #2a3040;
+    --color-text-primary: #e2e6ed;
+    --color-text-secondary: #8a92a8;
+}
