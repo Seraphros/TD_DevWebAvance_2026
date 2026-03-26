@@ -4,7 +4,7 @@ import {Navbar} from "./components/Navbar.tsx";
 import {RoomDeclarator} from "./components/RoomDeclarator.tsx";
 import {useRoomStore} from "./stores/RoomStore.ts";
 import {Room} from "./components/Room.tsx";
-import {Routes, Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 
 export const App: React.FC = () => {
 
@@ -28,15 +28,14 @@ export const App: React.FC = () => {
             <Navbar onDarkModeToggle={setDarkMode}/>
             <Routes>
                 <Route path="/createRoom" Component={RoomDeclarator}/>
-            </Routes>
-            <div className="grow">
                 {
                     rooms.map((room) => (
-                        <div key={room.id} className="p-5">
-                            <Room title={room.name}/>
-                        </div>
+                        <Route key={room.id} path={`/room/${room.id}`} element={<Room title={room.name}/>}/>
                     ))
                 }
+            </Routes>
+            <div className="grow">
+
             </div>
 
             <footer className="py-6 text-center text-xs text-text-secondary/50">
