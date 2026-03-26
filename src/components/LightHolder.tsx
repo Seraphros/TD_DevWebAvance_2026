@@ -12,7 +12,7 @@ export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
     const {getLightsOfRoom, setLightsOfRoom} = useRoomStore();
 
     const lights = getLightsOfRoom(roomId);
-    const litCount = lights.filter(l => l.on).length;
+    const litCount = lights.filter(l => l.state).length;
 
 
     const handleDelete = (id: string) => {
@@ -29,7 +29,7 @@ export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
                 {
                     lights.map(light => (
                             <Light key={light.id}
-                                   on={light.on}
+                                   on={light.state}
                                    setOn={(state) => handleLightsChange(
                                        lights.map(l => l.id === light.id ? {...l, on: state} : l)
                                    )}
@@ -46,7 +46,7 @@ export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
                                hover:bg-uni-green-dark
                                active:scale-97
                                transition-all duration-150"
-                    onClick={() => handleLightsChange([...lights, {id: crypto.randomUUID(), on: false}])}
+                    onClick={() => handleLightsChange([...lights, {id: crypto.randomUUID(), state: false}])}
                 >
                     + Ajouter une lampe
                 </button>

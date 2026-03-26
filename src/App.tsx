@@ -5,11 +5,29 @@ import {useRoomStore} from "./stores/RoomStore.ts";
 import {Room} from "./components/Room.tsx";
 import {Route, Routes, Navigate} from "react-router-dom";
 import {useDarkMode} from "./hooks/useDarkMode.ts";
+import {useQuery} from "@tanstack/react-query";
+import {fetchRooms} from "./api/RoomApi.ts";
+import {useEffect, useEffectEvent} from "react";
 
 export const App: React.FC = () => {
 
-    const {rooms} = useRoomStore();
+    const {rooms, setRooms} = useRoomStore();
     const {setDarkMode} = useDarkMode();
+
+
+    const {data: roomsFetched} = useQuery({
+        queryKey: ["rooms"],
+        queryFn: fetchRooms,
+    });
+
+    const handleRoomsFetched = useEffectEvent(() => {
+        if (roomsFetched) setRooms(roomsFetched);
+    })
+
+    useEffect(() => {
+        handleRoomsFetched();
+    }, [roomsFetched]);
+
 
     return (
         <div className="min-h-full flex flex-col">

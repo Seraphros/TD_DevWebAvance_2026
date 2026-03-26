@@ -1,4 +1,4 @@
 export type LightModel = {
     id: string,
-    on: boolean
+    state: boolean
 }
