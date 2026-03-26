@@ -2,10 +2,13 @@ import * as React from "react";
 import {useEffect, useEffectEvent} from "react";
 import {Navbar} from "./components/Navbar.tsx";
 import {RoomDeclarator} from "./components/RoomDeclarator.tsx";
+import {useRoomStore} from "./stores/RoomStore.ts";
+import {Room} from "./components/Room.tsx";
 
 export const App: React.FC = () => {
 
     const [darkMode, setDarkMode] = React.useState(false);
+    const {rooms} = useRoomStore();
 
     const handleDarkModeToggle = useEffectEvent(() => {
         document.documentElement.classList.toggle("dark", darkMode);
@@ -15,10 +18,21 @@ export const App: React.FC = () => {
         handleDarkModeToggle();
     }, [darkMode]);
 
+    useEffect(() => {
+        console.log("Rooms:", rooms);
+    }, [rooms]);
+
     return (
         <div className="min-h-full flex flex-col">
             <Navbar onDarkModeToggle={setDarkMode}/>
             <div className="grow">
+                {
+                    rooms.map((room) => (
+                        <div key={room.id} className="p-5">
+                            <Room title={room.name}/>
+                        </div>
+                    ))
+                }
                 <RoomDeclarator/>
             </div>
 

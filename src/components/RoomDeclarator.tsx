@@ -1,6 +1,19 @@
 import * as React from "react";
+import {useRoomStore} from "../stores/RoomStore.ts";
 
 export const RoomDeclarator: React.FC = () => {
+
+    const [name, setName] = React.useState("");
+    const {addRoom} = useRoomStore();
+
+    const triggerCreation = () => {
+        if (name.trim() === "") {
+            alert("Le nom de la pièce ne peut pas être vide.");
+            return;
+        }
+        addRoom(name);
+    }
+
     return (
         <div className="p-5 space-y-4">
             <div>
@@ -18,11 +31,14 @@ export const RoomDeclarator: React.FC = () => {
                     type="text"
                     placeholder="Ex: Salle de reunion"
                     className="w-full rounded-xl border border-surface-border bg-surface-card px-4 py-3 text-sm text-text-primary shadow-sm transition-colors placeholder:text-text-secondary/70 focus:border-uni-green focus:outline-none focus:ring-2 focus:ring-uni-green/30"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
             </div>
 
             <div className="flex items-end justify-end">
                 <button
+                    onClick={() => triggerCreation()}
                     className="cursor-pointer bg-uni-green px-4 py-3 text-white rounded-xl font-medium hover:bg-uni-green-dark transition-colors">
                     Valider
                 </button>

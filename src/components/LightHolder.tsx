@@ -1,7 +1,7 @@
 import {Light} from "./Light.tsx";
 import * as React from "react";
 import {useEffect, useEffectEvent} from "react";
-import type {LightModel} from "../types/LightModel.tsx";
+import type {LightModel} from "../types/LightModel.ts";
 
 export const LightHolder: React.FC = () => {
     const [lights, setLights] = React.useState<LightModel[]>([

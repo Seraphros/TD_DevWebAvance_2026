@@ -89,7 +89,7 @@ The app will be available at **http://localhost:5173** with hot-module replaceme
 │   │   ├── LightHolder.tsx     # Light collection manager (state, add button, counter)
 │   │   └── Navbar.tsx          # Top navigation bar
 │   ├── types/
-│   │   └── LightModel.tsx      # Light data model (id, on)
+│   │   └── LightModel.ts      # Light data model (id, on)
 │   ├── assets/                 # Images (hero, logos)
 │   ├── App.tsx                 # Root component — assembles Navbar, Card & LightHolder
 │   ├── index.css               # Tailwind import & UniLaSalle theme tokens
