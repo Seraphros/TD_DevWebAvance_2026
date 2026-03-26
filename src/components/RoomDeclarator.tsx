@@ -1,18 +1,9 @@
 import * as React from "react";
-import {useRoomStore} from "../stores/RoomStore.ts";
+import {useRoomDeclarator} from "../hooks/useRoomDeclarator.ts";
 
 export const RoomDeclarator: React.FC = () => {
 
-    const [name, setName] = React.useState("");
-    const {addRoom} = useRoomStore();
-
-    const triggerCreation = () => {
-        if (name.trim() === "") {
-            alert("Le nom de la pièce ne peut pas être vide.");
-            return;
-        }
-        addRoom(name);
-    }
+    const {name, setName, triggerCreation} = useRoomDeclarator();
 
     return (
         <div className="p-5 space-y-4">
