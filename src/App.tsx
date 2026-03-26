@@ -4,6 +4,7 @@ import {Navbar} from "./components/Navbar.tsx";
 import {RoomDeclarator} from "./components/RoomDeclarator.tsx";
 import {useRoomStore} from "./stores/RoomStore.ts";
 import {Room} from "./components/Room.tsx";
+import {Routes, Route} from "react-router-dom";
 
 export const App: React.FC = () => {
 
@@ -25,6 +26,9 @@ export const App: React.FC = () => {
     return (
         <div className="min-h-full flex flex-col">
             <Navbar onDarkModeToggle={setDarkMode}/>
+            <Routes>
+                <Route path="/createRoom" Component={RoomDeclarator}/>
+            </Routes>
             <div className="grow">
                 {
                     rooms.map((room) => (
@@ -33,7 +37,6 @@ export const App: React.FC = () => {
                         </div>
                     ))
                 }
-                <RoomDeclarator/>
             </div>
 
             <footer className="py-6 text-center text-xs text-text-secondary/50">

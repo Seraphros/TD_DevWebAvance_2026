@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Slider} from "./Slider.tsx";
+import {NavLink} from "react-router-dom";
 
 type NavbarProps = {
     onDarkModeToggle?: (enabled: boolean) => void;
@@ -19,9 +20,18 @@ export const Navbar: React.FC<NavbarProps> = ({onDarkModeToggle}) => {
                     </span>
                 </div>
 
-                <span className="hidden sm:block text-white/70 text-xs tracking-wide uppercase">
-                    Développement Web Avancé
-                </span>
+                <div className="mx-4 h-full grow text-white/70 text-xs tracking-wide">
+                    <NavLink
+                        to="/createRoom"
+                        className={
+                            (props) => {
+                                return "h-full transition-all flex items-center justify-center w-fit p-3 hover:bg-uni-navy-dark/30 cursor-pointer " +
+                                    (props.isActive ? "bg-uni-navy-dark" : "")
+                            }}
+                    >
+                        Ajouter une salle
+                    </NavLink>
+                </div>
                 <Slider initialState={false} onChange={onDarkModeToggle}/>
             </div>
         </nav>
