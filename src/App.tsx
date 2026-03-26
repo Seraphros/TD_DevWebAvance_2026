@@ -3,7 +3,7 @@ import {Navbar} from "./components/Navbar.tsx";
 import {RoomDeclarator} from "./components/RoomDeclarator.tsx";
 import {useRoomStore} from "./stores/RoomStore.ts";
 import {Room} from "./components/Room.tsx";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, Navigate} from "react-router-dom";
 import {useDarkMode} from "./hooks/useDarkMode.ts";
 
 export const App: React.FC = () => {
@@ -22,9 +22,10 @@ export const App: React.FC = () => {
                         rooms.map((room) => (
                             <Route key={room.id}
                                    path={`/room/${room.id}`}
-                                   element={<Room key={room.id} title={room.name}/>}/>
+                                   element={<Room key={room.id} room={room}/>}/>
                         ))
                     }
+                    <Route path="*" element={<Navigate to="/createRoom" replace/>}/>
                 </Routes>
             </div>
 

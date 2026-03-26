@@ -1,29 +1,26 @@
 import {Light} from "./Light.tsx";
 import * as React from "react";
-import {useEffect, useEffectEvent} from "react";
 import type {LightModel} from "../types/LightModel.ts";
+import {useRoomStore} from "../stores/RoomStore.ts";
 
-export const LightHolder: React.FC = () => {
-    const [lights, setLights] = React.useState<LightModel[]>([
-        {id: crypto.randomUUID(), on: false},
-        {id: crypto.randomUUID(), on: false},
-        {id: crypto.randomUUID(), on: false},
-        {id: crypto.randomUUID(), on: false},
-        {id: crypto.randomUUID(), on: false},
-    ]);
+type LightHolderProps = {
+    roomId: string;
+}
 
-    const logLight = useEffectEvent(() => {
-        console.log(lights);
-    });
+export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
 
-    useEffect(() => {
-        logLight();
-    }, [lights]);
+    const {getLightsOfRoom, setLightsOfRoom} = useRoomStore();
 
+    const lights = getLightsOfRoom(roomId);
     const litCount = lights.filter(l => l.on).length;
 
+
     const handleDelete = (id: string) => {
-        setLights(lights.filter(l => l.id !== id));
+        setLightsOfRoom(roomId, lights.filter(l => l.id !== id));
+    }
+
+    const handleLightsChange = (lights: LightModel[]) => {
+        setLightsOfRoom(roomId, lights);
     }
 
     return (
@@ -33,7 +30,7 @@ export const LightHolder: React.FC = () => {
                     lights.map(light => (
                             <Light key={light.id}
                                    on={light.on}
-                                   setOn={(state) => setLights(
+                                   setOn={(state) => handleLightsChange(
                                        lights.map(l => l.id === light.id ? {...l, on: state} : l)
                                    )}
                                    onDelete={() => handleDelete(light.id)}/>
@@ -49,7 +46,7 @@ export const LightHolder: React.FC = () => {
                                hover:bg-uni-green-dark
                                active:scale-97
                                transition-all duration-150"
-                    onClick={() => setLights([...lights, {id: crypto.randomUUID(), on: false}])}
+                    onClick={() => handleLightsChange([...lights, {id: crypto.randomUUID(), on: false}])}
                 >
                     + Ajouter une lampe
                 </button>
