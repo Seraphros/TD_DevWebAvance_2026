@@ -1,6 +1,11 @@
 import * as React from "react";
+import {Slider} from "./Slider.tsx";
 
-export const Navbar: React.FC = () => {
+type NavbarProps = {
+    onDarkModeToggle?: (enabled: boolean) => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({onDarkModeToggle}) => {
     return (
         <nav className="bg-uni-navy">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
@@ -17,6 +22,7 @@ export const Navbar: React.FC = () => {
                 <span className="hidden sm:block text-white/70 text-xs tracking-wide uppercase">
                     Développement Web Avancé
                 </span>
+                <Slider initialState={false} onChange={onDarkModeToggle}/>
             </div>
         </nav>
     );

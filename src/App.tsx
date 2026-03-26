@@ -1,17 +1,25 @@
 import * as React from "react";
-import {LightHolder} from "./components/LightHolder.tsx";
+import {useEffect, useEffectEvent} from "react";
 import {Navbar} from "./components/Navbar.tsx";
-import {Card} from "./components/Card.tsx";
+import {RoomDeclarator} from "./components/RoomDeclarator.tsx";
 
 export const App: React.FC = () => {
+
+    const [darkMode, setDarkMode] = React.useState(false);
+
+    const handleDarkModeToggle = useEffectEvent(() => {
+        document.documentElement.classList.toggle("dark", darkMode);
+    })
+
+    useEffect(() => {
+        handleDarkModeToggle();
+    }, [darkMode]);
+
     return (
         <div className="min-h-full flex flex-col">
-            <Navbar/>
-
-            <div className="flex-1 flex flex-col items-center px-4 py-12 sm:py-20">
-                <Card title="Lights" description="Cliquez sur une lampe pour l'allumer">
-                    <LightHolder/>
-                </Card>
+            <Navbar onDarkModeToggle={setDarkMode}/>
+            <div className="grow">
+                <RoomDeclarator/>
             </div>
 
             <footer className="py-6 text-center text-xs text-text-secondary/50">
