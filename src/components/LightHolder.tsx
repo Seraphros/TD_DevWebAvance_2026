@@ -2,25 +2,36 @@ import {Light} from "./Light.tsx";
 import * as React from "react";
 import type {LightModel} from "../types/LightModel.ts";
 import {useRoomStore} from "../stores/RoomStore.ts";
+import type {RoomModel} from "../types/RoomModel.ts";
+import {useQueryClient} from "@tanstack/react-query";
+import {postRooms} from "../api/RoomApi.ts";
 
 type LightHolderProps = {
-    roomId: string;
+    room: RoomModel;
 }
 
-export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
+export const LightHolder: React.FC<LightHolderProps> = ({room}) => {
+    const queryClient = useQueryClient();
+    const {getLightsOfRoom} = useRoomStore();
 
-    const {getLightsOfRoom, setLightsOfRoom} = useRoomStore();
-
-    const lights = getLightsOfRoom(roomId);
+    const lights = getLightsOfRoom(room.id ?? "");
     const litCount = lights.filter(l => l.state).length;
 
 
     const handleDelete = (id: string) => {
-        setLightsOfRoom(roomId, lights.filter(l => l.id !== id));
+        postRooms([{...room, lights: room.lights.filter(l => l.id !== id)}]).then(() => {
+            queryClient.invalidateQueries({queryKey: ['rooms']}).then(() => {
+                console.log("Query rooms invalidated");
+            });
+        });
     }
 
     const handleLightsChange = (lights: LightModel[]) => {
-        setLightsOfRoom(roomId, lights);
+        postRooms([{...room, lights: lights}]).then(() => {
+            queryClient.invalidateQueries({queryKey: ['rooms']}).then(() => {
+                console.log("Query rooms invalidated");
+            });
+        });
     }
 
     return (
@@ -31,9 +42,9 @@ export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
                             <Light key={light.id}
                                    on={light.state}
                                    setOn={(state) => handleLightsChange(
-                                       lights.map(l => l.id === light.id ? {...l, on: state} : l)
+                                       lights.map(l => l.id === light.id ? {...l, state: state} : l)
                                    )}
-                                   onDelete={() => handleDelete(light.id)}/>
+                                   onDelete={() => handleDelete(light.id ?? "")}/>
                         )
                     )
                 }
@@ -46,7 +57,7 @@ export const LightHolder: React.FC<LightHolderProps> = ({roomId}) => {
                                hover:bg-uni-green-dark
                                active:scale-97
                                transition-all duration-150"
-                    onClick={() => handleLightsChange([...lights, {id: crypto.randomUUID(), state: false}])}
+                    onClick={() => handleLightsChange([...lights, {state: false}])}
                 >
                     + Ajouter une lampe
                 </button>
